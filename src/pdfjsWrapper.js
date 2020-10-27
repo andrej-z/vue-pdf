@@ -120,17 +120,17 @@ export default function(PDFJS) {
 
 				return pdfDoc.getPage(1)
 				.then(function(page) {
-
+					debugger;
 					var viewport = page.getViewport({ scale: 1 });
-					var printCanvasElt = tempElt.appendChild(document.createElement('canvas'));
+					//var printCanvasElt = tempElt.appendChild(document.createElement('canvas'));
 					win.document.head.appendChild(win.document.createElement('style')).textContent =
 						'@supports ((size:A4) and (size:1pt 1pt)) {' +
-							'@page { margin: 1pt; size: ' + ((viewport.width * PRINT_UNITS) / CSS_UNITS) + 'pt ' + ((viewport.height * PRINT_UNITS) / CSS_UNITS) + 'pt; }' +
+							'@page { size: ' + ((viewport.width * PRINT_UNITS) / (CSS_UNITS*200)) + 'pt ' + ((viewport.height * PRINT_UNITS) / (CSS_UNITS*100)) + 'pt; }' +
 						'}' +
 
 						'@media print {' +
-							'body { margin: 0 }' +
-							'canvas { page-break-before: avoid; page-break-after: always; page-break-inside: avoid }' +
+							'body { margin: 1%;page-break-before: avoid; page-break-after: avoid; page-break-inside: avoid; }' +
+							'canvas { page-break-before: avoid; page-break-after: avoid; page-break-inside: avoid;width:100% }' +
 						'}'+
 
 						'@media screen {' +
